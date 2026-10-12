@@ -28,6 +28,7 @@ contract RejectingTokenRecipient {
     }
 }
 
+/// forge-config: default.fuzz.runs = 1000
 contract IMDogLaunchTest is Test {
     uint256 internal constant SUPPLY = 1_000_000_000 * 1e18;
     TokenFactoryHarness internal factory;
@@ -110,7 +111,7 @@ contract IMDogLaunchTest is Test {
     }
 
     function testFuzz_distinctFactoryDeploymentsHaveIndependentFixedSupplies(bytes32 salt) public {
-        vm.assume(salt != bytes32(uint256(1)));
+        if (salt == bytes32(uint256(1))) salt = bytes32(0);
         IMDog another = factory.deploy(salt);
         assertTrue(address(another) != address(token));
         assertEq(another.totalSupply(), SUPPLY);
