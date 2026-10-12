@@ -5,6 +5,7 @@ import {Test} from "forge-std/Test.sol";
 import {IERC20Errors} from "@openzeppelin/contracts/interfaces/draft-IERC6093.sol";
 import {IMDog} from "../src/IMDog.sol";
 
+/// forge-config: default.fuzz.runs = 1000
 contract IMDogTest is Test {
     IMDog internal token;
     uint256 internal constant SUPPLY = 1_000_000_000 * 1e18;
@@ -301,7 +302,8 @@ contract IMDogTest is Test {
     }
 
     function testFuzz_transferConservesSupplyAndArrivesWhole(address recipient, uint256 rawAmount) public {
-        vm.assume(recipient != address(0) && recipient != address(this));
+        recipient = address(uint160(bound(uint160(recipient), 1, type(uint160).max)));
+        if (recipient == address(this)) recipient = alice;
         uint256 amount = bound(rawAmount, 0, SUPPLY);
         assertTrue(token.transfer(recipient, amount));
         assertEq(token.balanceOf(recipient), amount);
