@@ -1,0 +1,24 @@
+{
+  "kind": "custom_token",
+  "token": {
+    "contract": "IMDog",
+    "name": "IMDog",
+    "symbol": "IMDOG",
+    "decimals": 18,
+    "constructorArgs": [],
+    "totalSupply": "1000000000000000000000000000"
+  },
+  "contracts": [],
+  "pool": {
+    "pairedCurrency": "0x0000000000000000000000000000000000000000",
+    "fee": 12500,
+    "tickSpacing": 60,
+    "initialPrice": "79228162514264337593543950336"
+  },
+  "economics": {
+    "poolBps": 8800,
+    "initialMarketCapWei": "10000000000000000000",
+    "remainderTo": "0xf2816f3f05fac35577b1930ffd09b531b62628df"
+  },
+  "notes": "IMDog is a fixed-supply ERC-20 with 18 decimals. Its no-argument constructor mints 1,000,000,000 IMDOG once to msg.sender, the factory during launch. It has no subsequent minting, transfer fees or administrative controls. The official, unmodified logo is ipfs://bafybeie5pg3kfdo6fl7dllampv44j2bymf46j554n5ehdmsryl5ejbrdre. The token permanently links this logo through LOGO_URI(), the image field in metadataJSON(), and the same metadata encoded by contractURI(). There are no application contracts or initialization calls. pool.initialPrice records provenance only; the opening price is derived from economics.initialMarketCapWei and totalSupply."
+}
